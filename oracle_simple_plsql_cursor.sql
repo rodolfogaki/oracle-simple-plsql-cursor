@@ -1,22 +1,22 @@
 DECLARE
-    cursor cur_pessoa is
+    cursor cur_pessoa_ativa is
            select p.nome_completo,p.email
              from pessoa p
             where 1=1
               and p.status = 'A'
            ;
     --
-    reg_pessoa cur_pessoa%rowtype;
+    reg_pessoa_ativa cur_pessoa_ativa%rowtype;
 BEGIN
-    open cur_pessoa;
+    open cur_pessoa_ativa;
     --
     loop
-        fetch cur_pessoa into reg_pessoa;
-         exit when cur_pessoa%notfound;
-        dbms_output.put_line(reg_pessoa.nome_completo||' - '||reg_pessoa.email);
+        fetch cur_pessoa_ativa into reg_pessoa_ativa;
+         exit when cur_pessoa_ativa%notfound;
+        dbms_output.put_line(reg_pessoa_ativa.nome_completo||' - '||reg_pessoa_ativa.email);
     end loop;
     --
-    close cur_pessoa;
+    close cur_pessoa_ativa;
 END;
 
 /*
